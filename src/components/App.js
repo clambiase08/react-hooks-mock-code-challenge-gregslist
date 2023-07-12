@@ -4,13 +4,17 @@ import ListingsContainer from "./ListingsContainer";
 
 function App() {
   const [listings, setListings] = useState([])
-  const [search, setSearch] = useState({
-    query: "",
-    listings: []
-  })
+  const [search, setSearch] = useState("")
+  const [sortListings, setSortListings] = useState("none")
 
-  const searchedListings = listings.filter((listing) => listing.description.includes(search.query))
+  const sortOptions = {
+    none: { method: () => null },
+    location: { method: (a, b) => (a.location > b.location ? 1: -1) }
+  }
 
+  const searchedListings = listings.filter((listing) => listing.description.toLowerCase().includes(search.toLowerCase()))
+
+  const sortedListings = [...searchedListings].sort(sortOptions[sortListings].method)
   
 
   function removeListing(deletedListing) {
@@ -27,8 +31,8 @@ function App() {
 
 
     <div className="app">
-      <Header setSearch={setSearch} search={search} listings={listings}/>
-      <ListingsContainer listings={searchedListings} removeListing={removeListing}/>
+      <Header setSearch={setSearch} search={search} onSortChange={setSortListings}/>
+      <ListingsContainer listings={sortedListings} removeListing={removeListing}/>
     </div>
   );
 }

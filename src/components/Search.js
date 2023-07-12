@@ -1,19 +1,9 @@
 import React from "react";
 
-function Search({setSearch, search, listings}) {
+function Search({setSearch, search}) {
 
   function handleSearch(e) {
-    const results = listings.filter((listing) => {
-      if (e.target.value === "") {
-        return listings
-      } else {
-        return listing.description.toLowerCase().includes((e.target.value).toLowerCase())
-      }
-    })
-    setSearch({
-      query: e.target.value,
-      listings: results
-    })
+    setSearch(e.target.value)
   }
 
   function handleSubmit(e) {
@@ -27,7 +17,7 @@ function Search({setSearch, search, listings}) {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={search.query}
+        value={search}
         onChange={handleSearch}
       />
       <button type="submit">🔍</button>
