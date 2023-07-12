@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import ListingCard from "./ListingCard";
 
-function ListingsContainer({listings}) {
-
+function ListingsContainer({ listings, removeListing }) {
   const listingDetails = listings.map((listing) => {
-    return <ListingCard key={listing.id} description={listing.description} image={listing.image} location={listing.location} />
-  })
+    return (
+      <ListingCard
+        key={listing.id}
+       listing={listing}
+        onDelete={removeListing}
+      />
+    );
+  });
 
   return (
     <main>
-      <ul className="cards">
-        {listingDetails}
-      </ul>
+      <ul className="cards">{listingDetails}</ul>
     </main>
   );
 }

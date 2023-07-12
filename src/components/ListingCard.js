@@ -1,15 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-function ListingCard({description, image, location}) {
+function ListingCard({ listing, onDelete }) {
+  const { image, description, location } = listing;
 
-  const [isFavorited, setIsFavorited] = useState(false)
+  const [isFavorited, setIsFavorited] = useState(false);
 
-  function toggleFavorite() {
-    setIsFavorited(isFavorited => !isFavorited)
+  function handleDelete() {
+    onDelete(listing);
   }
 
-  const starFill = isFavorited ? "★" : "☆"
+  function toggleFavorite() {
+    setIsFavorited((isFavorited) => !isFavorited);
+  }
 
+  const starFill = isFavorited ? "★" : "☆";
 
   return (
     <li className="card">
@@ -19,13 +23,22 @@ function ListingCard({description, image, location}) {
       </div>
       <div className="details">
         {true ? (
-          <button onClick={toggleFavorite} className="emoji-button favorite active">{starFill}</button>
+          <button
+            onClick={toggleFavorite}
+            className="emoji-button favorite active"
+          >
+            {starFill}
+          </button>
         ) : (
-          <button onClick={toggleFavorite} className="emoji-button favorite">{starFill}</button>
+          <button onClick={toggleFavorite} className="emoji-button favorite">
+            {starFill}
+          </button>
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button className="emoji-button delete">🗑</button>
+        <button onClick={handleDelete} className="emoji-button delete">
+          🗑
+        </button>
       </div>
     </li>
   );
