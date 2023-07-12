@@ -6,7 +6,7 @@ function ListingsContainer({ listings, removeListing }) {
     return (
       <ListingCard
         key={listing.id}
-       listing={listing}
+        listing={listing}
         onDelete={removeListing}
       />
     );

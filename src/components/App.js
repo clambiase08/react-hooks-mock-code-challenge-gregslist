@@ -4,6 +4,14 @@ import ListingsContainer from "./ListingsContainer";
 
 function App() {
   const [listings, setListings] = useState([])
+  const [search, setSearch] = useState({
+    query: "",
+    listings: []
+  })
+
+  const searchedListings = listings.filter((listing) => listing.description.includes(search.query))
+
+  
 
   function removeListing(deletedListing) {
     setListings(listings.filter((listing) => listing.id !== deletedListing.id))
@@ -19,8 +27,8 @@ function App() {
 
 
     <div className="app">
-      <Header />
-      <ListingsContainer listings={listings} removeListing={removeListing}/>
+      <Header setSearch={setSearch} search={search} listings={listings}/>
+      <ListingsContainer listings={searchedListings} removeListing={removeListing}/>
     </div>
   );
 }
