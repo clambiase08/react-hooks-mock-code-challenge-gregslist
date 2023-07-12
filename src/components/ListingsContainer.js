@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ListingCard from "./ListingCard";
 
 function ListingsContainer({listings}) {

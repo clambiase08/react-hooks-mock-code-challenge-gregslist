@@ -11,8 +11,6 @@ function App() {
     .then(listingData => setListings(listingData))
   }, [])
 
-  console.log(listings)
-
   return (
 
 
